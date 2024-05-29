@@ -1,6 +1,6 @@
-import 'package:dating_app/Auth/LoginScreen.dart';
 import 'package:dating_app/Controllers/AuthController.dart';
 import 'package:dating_app/firebase_options.dart';
+import 'package:dating_app/screens/Auth/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        home: Loginscreen(),
+        home: Splashscreen(),
       ),
     );
   }

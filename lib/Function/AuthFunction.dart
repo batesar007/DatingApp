@@ -13,7 +13,7 @@ final Database = FirebaseFirestore.instance;
 final class Authfunction {
   BuildContext context;
   Authfunction(this.context);
-
+  
   Future signup(Usermodel model, password) async {
     try {
       final data = await Auth.createUserWithEmailAndPassword(
@@ -26,7 +26,7 @@ final class Authfunction {
     } catch (e) {
       print(e);
     }
-  }
+  } 
 
   Future createcollatction(Usermodel model, String uid) async {
     try {
