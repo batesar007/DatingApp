@@ -18,7 +18,7 @@ class PhnNumberScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -34,6 +34,7 @@ class PhnNumberScreen extends StatelessWidget {
                 ),
                 IntlPhoneField(
                   decoration: InputDecoration(
+                      contentPadding: EdgeInsetsDirectional.only(top: 13),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: appclr.Premiery)),
                       focusedBorder: UnderlineInputBorder(

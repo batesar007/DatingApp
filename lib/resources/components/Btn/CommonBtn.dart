@@ -11,7 +11,7 @@ class CommonBtn extends StatelessWidget {
   final Function onPressed;
   CommonBtn(
       {super.key,
-      required this.btn_name,
+      required this.btn_name,    
       this.txtclr,
       this.bgclr,
       this.isexpanded = false,
@@ -59,16 +59,13 @@ class CommonBtn extends StatelessWidget {
 //     path.lineTo(size.width, size.height);
 //     path.lineTo(0, size.height);
 //     path.close();
-
 //     canvas.drawPath(path, paint);
 //   }
-
 //   @override
 //   bool shouldRepaint(covariant CustomPainter oldDelegate) {
 //     return false;
 //   }
 // }
-
 // class CustomWavePainterExample extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
