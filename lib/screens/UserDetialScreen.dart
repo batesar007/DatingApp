@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:dating_app/resources/components/Btn/CommonBtn.dart';
+import 'package:dating_app/resources/components/DropDown/DropDownField.dart';
+import 'package:dating_app/resources/components/ImgPicker/PremieryImgPicker.dart';
 import 'package:dating_app/resources/components/TextFormField/PremieryTxtField.dart';
+import 'package:dating_app/resources/constant/AppService.dart';
 import 'package:dating_app/resources/constant/ImgPath.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';
 import 'package:dating_app/resources/constant/stylesheet.dart';
+import 'package:dating_app/screens/LocationScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -18,109 +24,169 @@ class UserDetialScreen extends StatefulWidget {
 
 class _UserDetialScreenState extends State<UserDetialScreen> {
   final appimg = Appimg();
-
   final font = AppTextTheme();
-
   final appclr = Appcolor();
   DateTime selectedDate = DateTime.now();
-  var listindex = listGender[0];
-  var showindex = listshow[0];
-
+  String? listindex;
+  String? showindex;
+  File? imageFile;
+  String image = "";
+  final TextEditingController _dobcontroller = TextEditingController();
+  final TextEditingController _namecontroller = TextEditingController();
+  final TextEditingController _universitycontroller = TextEditingController();
+  final TextEditingController _addresscontroller = TextEditingController();
+  // final TextEditingController _gendercontroller = TextEditingController();
+  // final TextEditingController _showprofilecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(20),
-            Text(
-              "Please!\nFill Your Detials",
-              style: font.fs24SemiBold(),
-            ),
-            Gap(30),
-            Premierytxtfield(
-              hint_txt: "Full Name",
-              prefix: Icons.person_rounded,
-            ),
-            Gap(10),
-            Premierytxtfield(
-              onpressed: () {
-                selectDatepicker(context);
-              },
-              hint_txt: "${selectedDate.toLocal()}".split(' ')[0],
-              prefix: Icons.calendar_month,
-              readOnly: true,
-            ),
-            Gap(10),
-            Premierytxtfield(
-              hint_txt: "University",
-              prefix: Icons.menu_book_rounded,
-            ),
-            Gap(10),
-            DropdownButtonFormField(
-                // dropdownColor: AppColor.yellow,
-                //   focusColor: AppColor.yellow,
-                icon: Icon(Icons.swap_vert),
-                hint: Text("Enter Your Gender"),
-                decoration: InputDecoration(
-                    fillColor: appclr.White,
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: appclr.grey)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: appclr.grey))),
-                isDense: true,
-                isExpanded: true,
-                itemHeight: 50,
-                value: listindex,
-                items: listGender
-                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                    .toList(),
-                onChanged: (u) {
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(20),
+              Text(
+                "Please!\nFill Your Detials",
+                style: font.fs24SemiBold(),
+              ),
+              Gap(30),
+              Center(
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(60),
+                        child: imageFile == null
+                            ? (image.isEmpty
+                                ? Container(
+                                    padding: EdgeInsets.all(9),
+                                    decoration: BoxDecoration(
+                                        color: appclr.grey,
+                                        shape: BoxShape.circle),
+                                    child: Icon(
+                                      Icons.person,
+                                      color: appclr.White,
+                                      size: 90,
+                                    ))
+                                : Image.network(
+                                    image,
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
+                                  ))
+                            : Image.file(
+                                File(imageFile!.path),
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.cover,
+                              )),
+                    Positioned(
+                      bottom: 3,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) =>
+                                  imagePickerbottomsheet(context, (v) {
+                                    if (v.path.isNotEmpty) {
+                                      setState(() {
+                                        imageFile = v;
+                                      });
+                                    } else {
+                                      null;
+                                    }
+                                  }, () {
+                                    App_service(context).popTo();
+                                    setState(() {
+                                      imageFile = null;
+                                    });
+                                  }));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: appclr.Premiery, shape: BoxShape.circle),
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: appclr.White,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gap(30),
+              Premierytxtfield(
+                controller: _namecontroller,
+                title: "Enter Your Name",
+                hint_txt: "Full Name",
+                prefix: Icons.person_rounded,
+              ),
+              Gap(10),
+              Premierytxtfield(
+                controller: _dobcontroller,
+                title: "Date of Brith",
+                onpressed: () {
+                  selectDatepicker(context);
+                },
+                hint_txt: "DOB",
+                prefix: Icons.calendar_month,
+                readOnly: true,
+              ),
+              Gap(10),
+              Premierytxtfield(
+                controller: _universitycontroller,
+                title: "Enter Your University",
+                hint_txt: "University",
+                prefix: Icons.menu_book_rounded,
+              ),
+              Gap(10),
+              Premierytxtfield(
+                controller: _addresscontroller,
+                title: "Enter Your Address",
+                hint_txt: "Address",
+                prefix: Icons.location_on_outlined,
+              ),
+              Gap(10),
+              Dropdownfield_premray(
+                hint: "Gender",
+                title: "Select Your Gender",
+                items: listGender,
+                onChanged: (p0) {
                   setState(() {
-                    listindex = u!;
+                    showindex = p0!;
                   });
-                }),
-            Gap(10),
-            DropdownButtonFormField(
-                // dropdownColor: AppColor.yellow,
-                //   focusColor: AppColor.yellow,
-                icon: Icon(Icons.swap_vert),
-                hint: Text("Show Me"),
-                decoration: InputDecoration(
-                    fillColor: appclr.White,
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: appclr.grey)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: appclr.grey))),
-                isDense: true,
-                isExpanded: true,
-                itemHeight: 50,
-                value: showindex,
-                items: listshow
-                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                    .toList(),
-                onChanged: (u) {
+                },
+              ),
+              Gap(10),
+              Dropdownfield_premray(
+                hint: "Choose One",
+                title: "Show Your Profile ?",
+                items: listshow,
+                onChanged: (p0) {
                   setState(() {
-                    showindex = u!;
+                    listindex = p0!;
                   });
-                }),
-            Gap(30),
-            Row(
-              children: [
-                CommonBtn(
-                    btn_name: "Continue", isexpanded: true, onPressed: () {}),
-              ],
-            )
-          ],
+                },
+              ),
+              Gap(30),
+              Row(
+                children: [
+                  CommonBtn(
+                      btn_name: "Continue",
+                      isexpanded: true,
+                      onPressed: () {
+                        App_service(context).pushTo(LocationScreen());
+                      }),
+                ],
+              ),
+              Gap(20),
+            ],
+          ),
         ),
       )),
     );
@@ -134,6 +200,7 @@ class _UserDetialScreenState extends State<UserDetialScreen> {
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       setState(() {
+        _dobcontroller.text = "${selectedDate.toLocal()}".split(' ')[0];
         selectedDate = picked;
       });
     }

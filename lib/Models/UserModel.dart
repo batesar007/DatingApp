@@ -8,13 +8,14 @@ class Usermodel {
       this.qualification,
       this.img,
       this.uid});
-  Usermodel.fromuser(Map<String, dynamic> json, this.uid)
+  Usermodel.fromuser(Map<String, dynamic> json)
       : username = json["username"] ?? "",
         gmail = json["gmail"] ?? "",
         dob = json["dob"] ?? "",
         gender = json["gender"] ?? "",
         img = json["img"] ?? "",
-        qualification = json["qualification"] ?? "";
+        qualification = json["qualification"] ?? "",
+        uid = json["uid"] ?? "";
   Map<String, dynamic> tojson() {
     return {
       "username": username,
@@ -22,7 +23,8 @@ class Usermodel {
       "gender": gender,
       "gmail": gmail,
       "img": img,
-      "qualification": qualification
+      "qualification": qualification,
+      "uid": uid,
     };
   }
 
