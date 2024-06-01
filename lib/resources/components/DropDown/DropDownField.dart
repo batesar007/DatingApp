@@ -53,6 +53,7 @@ class _Dropdownfield_premrayState extends State<Dropdownfield_premray> {
             style: font.fs16Medium().copyWith(color: appclr.grey),
           ),
           decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
               fillColor: appclr.White,
               filled: true,
               focusedBorder: OutlineInputBorder(

@@ -1,3 +1,4 @@
+import 'package:dating_app/main.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';
 import 'package:dating_app/screens/BottomScreens/ChatScreen.dart';
 import 'package:dating_app/screens/BottomScreens/NearestScreen.dart';
@@ -21,7 +22,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     NotificationScreen(),
     ProfileScreen()
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

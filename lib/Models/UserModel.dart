@@ -28,7 +28,8 @@ class Usermodel {
     };
   }
 
-  Usermodel copywith({String? username, gmail, dob, gender, qualification, uid}) {
+  Usermodel copywith(
+      {String? username, gmail, dob, gender, qualification, uid}) {
     return Usermodel(
         username: username ?? this.username,
         gmail: gmail ?? this.gmail,
@@ -37,5 +38,10 @@ class Usermodel {
         qualification: qualification ?? this.qualification,
         img: img ?? this.img,
         uid: uid ?? this.uid);
+  }
+
+  @override
+  String toString() {
+    return 'Usermodel(username: $username, gmail: $gmail, dob: $dob, gender: $gender, qualification: $qualification, img: $img, uid: $uid)';
   }
 }

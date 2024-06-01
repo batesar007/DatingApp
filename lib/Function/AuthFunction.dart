@@ -19,7 +19,7 @@
 //       final data = await Auth.createUserWithEmailAndPassword(
 //           email: model.gmail!, password: password);
 //       if (data.user?.uid != null) {
-//         await createcollatction(model);
+//         await createcollatction(model.copywith(uid: data.user!.uid));
 //         preferences.setString("uid", data.user!.uid);
 //         //next screen
 //       }

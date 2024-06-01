@@ -1,7 +1,7 @@
 import 'package:dating_app/resources/constant/AppService.dart';
 import 'package:dating_app/resources/constant/ImgPath.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';
-import 'package:dating_app/screens/Auth/LoginScreen.dart';
+import 'package:dating_app/screens/Auth/StartingScreen.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatefulWidget {
@@ -16,8 +16,8 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(
-        Duration(seconds: 4), () => App_service(context).pushTo(Loginscreen()));
+    Future.delayed(Duration(seconds: 4),
+        () => App_service(context).pushTo(StartingScreen()));
   }
 
   @override

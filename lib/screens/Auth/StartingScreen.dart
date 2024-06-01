@@ -4,12 +4,13 @@ import 'package:dating_app/resources/constant/ImgPath.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';
 import 'package:dating_app/resources/constant/stylesheet.dart';
 import 'package:dating_app/screens/Auth/PhnNumberScreen.dart';
+import 'package:dating_app/screens/Auth/SignUpGmailScreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class Loginscreen extends StatelessWidget {
-  Loginscreen({super.key});
+class StartingScreen extends StatelessWidget {
+  StartingScreen({super.key});
   final appclr = Appcolor();
   final appicon = Appicon();
   final appimg = Appimg();
@@ -62,6 +63,16 @@ class Loginscreen extends StatelessWidget {
                         },
                         isexpanded: true,
                         btn_name: "LOGIN WITH PHONENUMBER"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    CommonBtn(
+                        onPressed: () {
+                          App_service(context).pushTo(SignUpGmailScreen());
+                        },
+                        isexpanded: true,
+                        btn_name: "LOGIN WITH GMAIL"),
                   ],
                 ),
                 Gap(10),
