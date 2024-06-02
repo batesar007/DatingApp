@@ -31,7 +31,7 @@
 //   Future createcollatction(Usermodel model) async {
 //     try {
 //       final provider = Provider.of<Authcontroller>(context, listen: false);
-//       await Database.collection("user").doc(model.uid).set(model.tojson()).then(
+//       await AllManageData.getapis.userdoc(model.uid!).set(model.tojson()).then(
 //         (value) async {
 //           await provider.setuserdata(Usermodel.fromuser(model.tojson()));
 //         },

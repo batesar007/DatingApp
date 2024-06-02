@@ -65,7 +65,7 @@ class StartingScreen extends StatelessWidget {
                         btn_name: "LOGIN WITH PHONENUMBER"),
                   ],
                 ),
-                Row(
+                Row(  
                   children: [
                     CommonBtn(
                         onPressed: () {

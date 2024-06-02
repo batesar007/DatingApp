@@ -1,6 +1,7 @@
 import 'package:dating_app/main.dart';
 import 'package:dating_app/resources/components/Btn/CommonBtn.dart';
 import 'package:dating_app/resources/components/TextFormField/PremieryTxtField.dart';
+import 'package:dating_app/screens/ViewModel/AuthFun.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -50,7 +51,14 @@ class SignUpGmailScreen extends StatelessWidget {
             Row(
               children: [
                 CommonBtn(
-                    btn_name: "SignUp", isexpanded: true, onPressed: () {}),
+                    btn_name: "SignUp",
+                    isexpanded: true,
+                    onPressed: () {
+                      AuthFun().SignUp(
+                          gmail: _gamilcontroller.text,
+                          Password: _passwordcontroller.text,
+                          context: context);
+                    }),
               ],
             )
           ],

@@ -12,12 +12,12 @@ late SharedPreferences preferences;
 late DataManager AllManageData;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  preferences = await SharedPreferences.getInstance();
-  AllManageData = await DataManager.instance;
-  runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  preferences = await SharedPreferences.getInstance();
+  AllManageData = await DataManager.instance;
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
