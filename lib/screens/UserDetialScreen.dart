@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:dating_app/resources/components/Btn/CommonBtn.dart';
-import 'package:dating_app/resources/components/DropDown/DropDownField.dart';
-import 'package:dating_app/resources/components/ImgPicker/PremieryImgPicker.dart';
-import 'package:dating_app/resources/components/TextFormField/PremieryTxtField.dart';
+import 'package:dating_app/components/Btn/CommonBtn.dart';
+import 'package:dating_app/components/DropDown/DropDownField.dart';
+import 'package:dating_app/components/ImgPicker/PremieryImgPicker.dart';
+import 'package:dating_app/components/TextFormField/PremieryTxtField.dart';
 import 'package:dating_app/resources/constant/AppService.dart';
 import 'package:dating_app/resources/constant/ImgPath.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';

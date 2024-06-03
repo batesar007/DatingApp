@@ -1,4 +1,4 @@
-import 'package:dating_app/resources/components/Btn/CommonBtn.dart';
+import 'package:dating_app/components/Btn/CommonBtn.dart';
 import 'package:dating_app/resources/constant/AppService.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';
 import 'package:dating_app/resources/constant/stylesheet.dart';

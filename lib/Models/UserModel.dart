@@ -1,13 +1,13 @@
 class Usermodel {
-  String? username, gmail, dob, gender, qualification, img, uid;
+  String username, gmail, dob, gender, qualification, img, uid;
   Usermodel(
-      {this.username,
-      this.dob,
-      this.gender,
-      this.gmail,
-      this.qualification,
-      this.img,
-      this.uid});
+      {this.username = "",
+      this.dob = "",
+      this.gender = "",
+      this.gmail = "",
+      this.qualification = "",
+      this.img = "",
+      this.uid = ""});
   Usermodel.fromuser(Map<String, dynamic> json)
       : username = json["username"] ?? "",
         gmail = json["gmail"] ?? "",
@@ -29,7 +29,13 @@ class Usermodel {
   }
 
   Usermodel copywith(
-      {String? username, gmail, dob, gender, qualification, uid}) {
+      {String? username,
+      String? gmail,
+      String? dob,
+      String? gender,
+      String? qualification,
+      String? img,
+      String? uid}) {
     return Usermodel(
         username: username ?? this.username,
         gmail: gmail ?? this.gmail,

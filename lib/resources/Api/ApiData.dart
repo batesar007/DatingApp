@@ -9,6 +9,6 @@ class ApiData {
   CollectionReference<Map<String, dynamic>> get getusercollection =>
       _Database.collection("user");
   // doc for user
-  DocumentReference<Map<String, dynamic>> userdoc(String id) =>
+  DocumentReference<Map<String, dynamic>> userdoc(String? id) =>
       getusercollection.doc(id);
 }
