@@ -14,10 +14,17 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 4),
         () => App_service(context).pushTo(StartingScreen()));
+    // final user = Prefrence.getuser(Prefrence.userkey);
+    // if (user == null) {
+    //   Future.delayed(Duration(seconds: 4),
+    //       () => App_service(context).pushTo(StartingScreen()));
+    // } else {
+    //   Future.delayed(Duration(seconds: 4),
+    //       () => App_service(context).pushTo(BottomBarScreen()));
+    // }
   }
 
   @override

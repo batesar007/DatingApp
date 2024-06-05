@@ -7,10 +7,10 @@ class UserViewmodel {
   Future<Usermodel> setuserdata(Usermodel model, String password) async {
     try {
       final user = await _Networkservice.SignUp(model, password);
-      print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+    //  print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       AllManageData.getapis.userdoc(user.uid).set(user.tojson());
-      print("[[[[[[[[[[[[[${user}-=-=-=-[[[[[]]]]]");
-      print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+  //    print("[[[[[[[[[[[[[${user}-=-=-=-[[[[[]]]]]");
+   //   print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       return user;
     } catch (e) {
       rethrow;
