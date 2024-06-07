@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dating_app/Data/Network/AbstractData.dart';
 import 'package:dating_app/Models/UserModel.dart';
+import 'package:dating_app/enums/Allenums.dart';
 import 'package:dating_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,29 +15,34 @@ class Networkservice extends AbstractData {
   }
 
   @override
-  Future get(path) {
+  Future get(path) async {
     Future<Object> responsedata;
     if (path is CollectionReference) {
       responsedata = path.get();
     } else if (path is Query<Map<String, dynamic>>) {
+      //TODO: apply the where method;
       responsedata = path.get();
     } else {
       responsedata = (path as DocumentReference).get();
     }
-
     return responsedata;
   }
 
   @override
   Future post(path, Map<String, dynamic> data) {
-    // TODO: implement post
-    throw UnimplementedError();
+    Future<void> responses;
+    if (path is CollectionReference) {
+      responses = path.add(data);
+    } else {
+      responses = (path as DocumentReference).set(data);
+    }
+    return responses;
   }
 
   @override
   Future update(path, Map<String, dynamic> data) {
     // TODO: implement update
-    throw UnimplementedError();
+    return (path as DocumentReference).update(data);
   }
 
   @override
@@ -75,5 +81,20 @@ class Networkservice extends AbstractData {
       rethrow;
     }
     return data!;
+  }
+
+  @override
+  Future AuthFunction(Authenums authtype, {Map<String, dynamic>? data}) async {
+    //TODO: for multipul use example user sign with gamil and phn anouther metnod
+    final String gmail = data!["gmail"];
+    final String password = data["password"];
+    //TODO: so i took gmail and password in this type
+    if (authtype == Authenums.SignUp) {
+      return await _Auth.createUserWithEmailAndPassword(
+          email: gmail, password: password);
+    } else {
+      return await _Auth.signInWithEmailAndPassword(
+          email: gmail, password: password);
+    }
   }
 }

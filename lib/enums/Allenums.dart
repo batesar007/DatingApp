@@ -1,0 +1,1 @@
+enum Authenums { SignUp, Login }
