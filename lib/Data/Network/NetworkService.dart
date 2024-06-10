@@ -38,7 +38,8 @@ class Networkservice extends AbstractData {
     }
     return responses;
   }
-
+ 
+ 
   @override
   Future update(path, Map<String, dynamic> data) {
     // TODO: implement update
