@@ -20,7 +20,7 @@ class Networkservice extends AbstractData {
     if (path is CollectionReference) {
       responsedata = path.get();
     } else if (path is Query<Map<String, dynamic>>) {
-      //TODO: apply the where method;
+      // TODO: apply the where method;
       responsedata = path.get();
     } else {
       responsedata = (path as DocumentReference).get();
@@ -38,8 +38,7 @@ class Networkservice extends AbstractData {
     }
     return responses;
   }
- 
- 
+
   @override
   Future update(path, Map<String, dynamic> data) {
     // TODO: implement update
@@ -90,12 +89,16 @@ class Networkservice extends AbstractData {
     final String gmail = data!["gmail"];
     final String password = data["password"];
     //TODO: so i took gmail and password in this type
-    if (authtype == Authenums.SignUp) {
-      return await _Auth.createUserWithEmailAndPassword(
-          email: gmail, password: password);
-    } else {
-      return await _Auth.signInWithEmailAndPassword(
-          email: gmail, password: password);
+    try {
+      if (authtype == Authenums.SignUp) {
+        return await _Auth.createUserWithEmailAndPassword(
+            email: gmail, password: password  );
+      } else if (authtype == Authenums.Login) {
+        return await _Auth.signInWithEmailAndPassword(
+            email: gmail, password: password);
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

@@ -1,5 +1,4 @@
 import 'package:dating_app/Controllers/AuthController.dart';
-import 'package:dating_app/Models/UserModel.dart';
 import 'package:dating_app/components/Btn/CommonBtn.dart';
 import 'package:dating_app/components/TextFormField/PremieryTxtField.dart';
 import 'package:dating_app/main.dart';
@@ -21,7 +20,6 @@ class SignUpGmailScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            // Text("Login With Gmail"),
             Gap(15),
             Center(
               child: Image.asset(
@@ -55,11 +53,10 @@ class SignUpGmailScreen extends StatelessWidget {
                     btn_name: "SignUp",
                     isexpanded: true,
                     onPressed: () {
-                      Authhandler(context).SignSc(
-                          Usermodel(
-                              gmail: _gamilcontroller.text,
-                              username: _namecontroller.text),
-                          _passwordcontroller.text);
+                      Authcontroller().SinUp({
+                        "user": _gamilcontroller.text,
+                        "password": _passwordcontroller.text
+                      }, context);
                     }),
               ],
             )

@@ -3,6 +3,8 @@ import 'package:dating_app/Data/Network/NetworkService.dart';
 import 'package:dating_app/Models/UserModel.dart';
 import 'package:dating_app/enums/Allenums.dart';
 import 'package:dating_app/main.dart';
+import 'package:dating_app/resources/constant/AppService.dart';
+import 'package:dating_app/screens/BottomBar.dart/BottomBarScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -22,19 +24,25 @@ class Authcontroller extends ChangeNotifier {
   Usermodel get getuserdata => _user;
 
   //SignUp Function
-  Future SinUp(Map<String, dynamic> data) async {
-    final userdata = Usermodel.fromuser(data);
+  Future SinUp(Map<String, dynamic> data, BuildContext context) async {
+    final userdata = Usermodel.fromuser(data["user"]);
     try {
       //TODO:
       final user = _Networkservice.AuthFunction(Authenums.SignUp,
               data: {"gmail": userdata.gmail, "password": data["password"]})
           as UserCredential;
+      print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       //TODO: get uid from Authantication
       final userid = user.user!.uid;
+      print("-=-=-=-=--=///////${user.user!.uid}\\\\\\-=-=-=-");
+      print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       if (userid.isNotEmpty) {
         await _Networkservice.post(AllManageData.getapis.userdoc(userid),
             userdata.copywith(uid: userid).tojson());
         _user = userdata.copywith(uid: userid);
+        App_service(context).pushTo(BottomBarScreen());
+      } else {
+        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       }
     } catch (e) {
       // show error
@@ -57,11 +65,9 @@ class Authcontroller extends ChangeNotifier {
             Usermodel.fromuser(snapshot.docs.first.data());
         _user = usermodeldata;
         notifyListeners();
-
       }
     } catch (e) {
       print(e.toString());
     }
   }
 }
-
