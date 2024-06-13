@@ -25,26 +25,29 @@ class Authcontroller extends ChangeNotifier {
 
   //SignUp Function
   Future SinUp(Map<String, dynamic> data, BuildContext context) async {
-    final userdata = Usermodel.fromuser(data["user"]);
+    final Usermodel userdata = Usermodel.fromuser(data["userdata"]);
+    print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     try {
       //TODO:
-      final user = _Networkservice.AuthFunction(Authenums.SignUp,
+      final credential = await _Networkservice.AuthFunction(Authenums.SignUp,
               data: {"gmail": userdata.gmail, "password": data["password"]})
           as UserCredential;
-      print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+      // final credential = await FirebaseAuth.instance
+      //     .createUserWithEmailAndPassword(
+      //         email: userdata.gmail, password: password);
       //TODO: get uid from Authantication
-      final userid = user.user!.uid;
-      print("-=-=-=-=--=///////${user.user!.uid}\\\\\\-=-=-=-");
+      final String userid = credential.user!.uid;
+      print("-=-=-=-=--=///////${userid}\\\\\\-=-=-=-");
       print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       if (userid.isNotEmpty) {
         await _Networkservice.post(AllManageData.getapis.userdoc(userid),
-            userdata.copywith(uid: userid).tojson());
+            await userdata.copywith(uid: userid).tojson());
         _user = userdata.copywith(uid: userid);
         App_service(context).pushTo(BottomBarScreen());
-      } else {
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       }
     } catch (e) {
+      print("///////////catch--${e}///////");
+      //  print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
       // show error
     } finally {
       notifyListeners();
@@ -54,7 +57,7 @@ class Authcontroller extends ChangeNotifier {
   //Login
   Future Login(String gmail, String password) async {
     try {
-      final snapshot = await _Networkservice.get(AllManageData
+      final snapshot = await _Networkservice.getData(AllManageData
               .getapis.getusercollection
               .where("gmail", isEqualTo: gmail))
           as QuerySnapshot<Map<String, dynamic>>;

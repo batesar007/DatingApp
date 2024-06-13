@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:465231099214:android:fbb899db3c19b5382bda1f",
         "android_client_info": {
-          "package_name": "com.dating.app"
+          "package_name": "com.example.dating_app"
         }
       },
       "oauth_client": [],

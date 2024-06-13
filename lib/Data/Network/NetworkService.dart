@@ -14,34 +14,34 @@ class Networkservice extends AbstractData {
     throw UnimplementedError();
   }
 
-  @override
-  Future get(path) async {
-    Future<Object> responsedata;
-    if (path is CollectionReference) {
-      responsedata = path.get();
-    } else if (path is Query<Map<String, dynamic>>) {
-      // TODO: apply the where method;
-      responsedata = path.get();
-    } else {
-      responsedata = (path as DocumentReference).get();
-    }
-    return responsedata;
-  }
+  // @override
+  // Future get(path) async {
+  //   Future<Object> responsedata;
+  //   if (path is CollectionReference) {
+  //     responsedata = path.get();
+  //   } else if (path is Query<Map<String, dynamic>>) {
+  //     // TODO: apply the where method;
+  //     responsedata = path.get();
+  //   } else {
+  //     responsedata = (path as DocumentReference).get();
+  //   }
+  //   return responsedata;
+  // }
 
   @override
-  Future post(path, Map<String, dynamic> data) {
-    Future<void> responses;
+  Future post(path, Map<String, dynamic> data) async {
+    // Future<void> responses;
     if (path is CollectionReference) {
-      responses = path.add(data);
+      return await path.add(data);
     } else {
-      responses = (path as DocumentReference).set(data);
+      return await (path as DocumentReference).set(data);
     }
-    return responses;
+    // return responses;
   }
 
   @override
   Future update(path, Map<String, dynamic> data) {
-    // TODO: implement update
+    // TODO: implement update+
     return (path as DocumentReference).update(data);
   }
 
@@ -91,14 +91,30 @@ class Networkservice extends AbstractData {
     //TODO: so i took gmail and password in this type
     try {
       if (authtype == Authenums.SignUp) {
+        print("-=-=-==-=-=-=-=-=-=-=-=-=--=-=-=-=");
         return await _Auth.createUserWithEmailAndPassword(
-            email: gmail, password: password  );
-      } else if (authtype == Authenums.Login) {
+            email: gmail, password: password);
+      } else {
         return await _Auth.signInWithEmailAndPassword(
             email: gmail, password: password);
       }
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future getData(path) async {
+    try {
+      if (path is CollectionReference) {
+        final response = await path.get();
+        response.docs.map(
+          (e) => e,
+        );
+      } else if (path is DocumentReference) {
+        final snapshot = await path.get();
+        snapshot.data();
+      }
+    } catch (e) {}
   }
 }

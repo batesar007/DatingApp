@@ -10,7 +10,7 @@ class Prefrence {
   static Future setuser(String value, String key) async {
     await _preferences.setString(key, value);
   }
-
+  
   static dynamic getuser(String key) async {
     await _preferences.getString(key);
   }

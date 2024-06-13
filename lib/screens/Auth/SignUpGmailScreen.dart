@@ -1,4 +1,5 @@
 import 'package:dating_app/Controllers/AuthController.dart';
+import 'package:dating_app/Models/UserModel.dart';
 import 'package:dating_app/components/Btn/CommonBtn.dart';
 import 'package:dating_app/components/TextFormField/PremieryTxtField.dart';
 import 'package:dating_app/main.dart';
@@ -53,10 +54,16 @@ class SignUpGmailScreen extends StatelessWidget {
                     btn_name: "SignUp",
                     isexpanded: true,
                     onPressed: () {
-                      Authcontroller().SinUp({
-                        "user": _gamilcontroller.text,
-                        "password": _passwordcontroller.text
-                      }, context);
+                      final modeldata = Usermodel(
+                          gmail: _gamilcontroller.text.trim(),
+                          username: _namecontroller.text.trim());
+                      Authcontroller().SinUp(
+                        {
+                          "userdata": modeldata.tojson(),
+                          "password": _passwordcontroller.text.trim()
+                        },
+                        context,
+                      );
                     }),
               ],
             )

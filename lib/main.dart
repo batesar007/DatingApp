@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 late DataManager AllManageData;
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

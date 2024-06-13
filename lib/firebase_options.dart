@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'datingapp-ece71.appspot.com',
     iosBundleId: 'com.example.datingApp',
   );
+
 }
