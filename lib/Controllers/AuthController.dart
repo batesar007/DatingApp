@@ -26,15 +26,13 @@ class Authcontroller extends ChangeNotifier {
   //SignUp Function
   Future SinUp(Map<String, dynamic> data, BuildContext context) async {
     final Usermodel userdata = Usermodel.fromuser(data["userdata"]);
-    print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+    // print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     try {
       //TODO:
       final credential = await _Networkservice.AuthFunction(Authenums.SignUp,
               data: {"gmail": userdata.gmail, "password": data["password"]})
           as UserCredential;
-      // final credential = await FirebaseAuth.instance
-      //     .createUserWithEmailAndPassword(
-      //         email: userdata.gmail, password: password);
+
       //TODO: get uid from Authantication
       final String userid = credential.user!.uid;
       print("-=-=-=-=--=///////${userid}\\\\\\-=-=-=-");
@@ -55,22 +53,26 @@ class Authcontroller extends ChangeNotifier {
   }
 
   //Login
-  Future Login(String gmail, String password) async {
+  Future Login(String gmail, String password, BuildContext context) async {
     try {
+      // print("0---===-=-=-=-=-0");
       final snapshot = await _Networkservice.getData(AllManageData
               .getapis.getusercollection
               .where("gmail", isEqualTo: gmail))
           as QuerySnapshot<Map<String, dynamic>>;
+    //  print("\\\\\\\\${snapshot}/////////////");
       if (snapshot.docs.isNotEmpty) {
         await _Networkservice.AuthFunction(Authenums.Login,
             data: {"gmail": gmail, "password": password}) as UserCredential;
         final Usermodel usermodeldata =
             Usermodel.fromuser(snapshot.docs.first.data());
         _user = usermodeldata;
-        notifyListeners();
+        App_service(context).pushTo(BottomBarScreen());
       }
     } catch (e) {
       print(e.toString());
+    } finally {
+      notifyListeners();
     }
   }
 }

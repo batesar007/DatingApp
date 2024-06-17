@@ -1,17 +1,17 @@
 import 'package:dating_app/components/Btn/CommonBtn.dart';
-import 'package:dating_app/resources/constant/AppService.dart';
 import 'package:dating_app/resources/constant/ImgPath.dart';
 import 'package:dating_app/resources/constant/colorsheet.dart';
 import 'package:dating_app/resources/constant/stylesheet.dart';
-import 'package:dating_app/screens/Auth/LoginScreen.dart';
+import 'package:dating_app/screens/Auth/LoginGmail.com.dart';
 import 'package:dating_app/screens/Auth/PhnNumberScreen.dart';
-import 'package:dating_app/screens/Auth/SignUpGmailScreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class StartingScreen extends StatelessWidget {
-  StartingScreen({super.key});
+import '../../resources/constant/AppService.dart';
+
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
   final appclr = Appcolor();
   final appicon = Appicon();
   final appimg = Appimg();
@@ -40,7 +40,7 @@ class StartingScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "By typing 'Sign Up', you agree wiht our Term.Learm how we process your data in our Privacy Policy and cookies Policy.",
+                  "By typing 'Login', you agree wiht our Term.Learm how we process your data in our Privacy Policy and cookies Policy.",
                   style: font.fs14Normal(),
                   textAlign: TextAlign.center,
                 ),
@@ -49,7 +49,7 @@ class StartingScreen extends StatelessWidget {
                   CommonBtn(
                       onPressed: () {},
                       isexpanded: true,
-                      btn_name: "SIGN UP WITH FACBOOK")
+                      btn_name: "LOGIN WITH FACBOOK")
                 ]),
                 Row(
                   children: [
@@ -58,23 +58,21 @@ class StartingScreen extends StatelessWidget {
                           App_service(context).pushTo(PhnNumberScreen());
                         },
                         isexpanded: true,
-                        btn_name: "SIGN UP WITH PHONENUMBER"),
+                        btn_name: "LOGIN WITH PHONENUMBER"),
                   ],
                 ),
                 Row(
                   children: [
                     CommonBtn(
                         onPressed: () {
-                          App_service(context).pushTo(SignUpGmailScreen());
+                          App_service(context).pushTo(LoginGmailScreen());
                         },
                         isexpanded: true,
-                        btn_name: "SIGN UP WITH GMAIL"),
+                        btn_name: "LOGIN WITH GMAIL"),
                   ],
                 ),
-                // Gap(10),
                 Gap(10),
-                Text("Trouble SignUp?"),
-                Gap(10),
+                Text("Trouble Login?"),
                 Gap(10),
                 RichText(
                     text: TextSpan(
@@ -93,14 +91,11 @@ class StartingScreen extends StatelessWidget {
                         style: TextStyle(color: appclr.Blue),
                         children: [
                       TextSpan(
-                          text: "Alredy you have an Account",
+                          text: "Do You Have No Account",
                           style: TextStyle(color: appclr.Black)),
                       TextSpan(
-                          text: " Login",
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              App_service(context).pushTo(LoginScreen());
-                            })
+                          text: " SIGN UP",
+                          recognizer: TapGestureRecognizer()..onTap = () {})
                     ])),
               ],
             ),

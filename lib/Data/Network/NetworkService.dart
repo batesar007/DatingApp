@@ -105,16 +105,18 @@ class Networkservice extends AbstractData {
 
   @override
   Future getData(path) async {
+    dynamic response;
     try {
       if (path is CollectionReference) {
-        final response = await path.get();
-        response.docs.map(
-          (e) => e,
-        );
+        response = await path.get();
       } else if (path is DocumentReference) {
-        final snapshot = await path.get();
-        snapshot.data();
+        response = await path.get();
+      } else if (path is Query<Map<String, dynamic>>) {
+        response = await path.get();
       }
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
+    return response;
   }
 }
