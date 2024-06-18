@@ -16,7 +16,6 @@ class SignUpGmailScreen extends StatelessWidget {
     final icon = AllManageData.geticon;
     final clr = AllManageData.getclr;
     return Scaffold(
-      
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

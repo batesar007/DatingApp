@@ -60,7 +60,7 @@ class Authcontroller extends ChangeNotifier {
               .getapis.getusercollection
               .where("gmail", isEqualTo: gmail))
           as QuerySnapshot<Map<String, dynamic>>;
-    //  print("\\\\\\\\${snapshot}/////////////");
+      //  print("\\\\\\\\${snapshot}/////////////");
       if (snapshot.docs.isNotEmpty) {
         await _Networkservice.AuthFunction(Authenums.Login,
             data: {"gmail": gmail, "password": password}) as UserCredential;
