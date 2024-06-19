@@ -40,6 +40,7 @@ class Authcontroller extends ChangeNotifier {
       if (userid.isNotEmpty) {
         await _Networkservice.post(AllManageData.getapis.userdoc(userid),
             await userdata.copywith(uid: userid).tojson());
+            
         _user = userdata.copywith(uid: userid);
         App_service(context).pushTo(BottomBarScreen());
       }
